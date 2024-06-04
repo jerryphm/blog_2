@@ -1,0 +1,74 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore any compiled code
+dist/
+build/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Ignore environment-specific files
+.env
+.env.local
+.env.*.local
+
+# Ignore dependency lock files
+yarn.lock
+package-lock.json
+
+# Ignore log files and backups
+*.log
+*.log.*
+*.backup
+*.bak
+
+# Ignore any IDE or editor-specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+
+# Ignore system files that might be created by macOS
+.AppleDouble
+.LSOverride
+
+# Ignore npm debug log
+npm-debug.log*
+
+# Ignore Yarn debug log
+yarn-debug.log*
+
+# Ignore Visual Studio Code folder
+.vscode/
+
+# Ignore editor backup files
+*~
+
+# Ignore generated files
+/coverage
+/build
+/dist
+/node_modules
+/tmp
+
+# Ignore any files in a directory named tmp
+/tmp/*
+
+# Ignore any .DS_Store files created by macOS
+.DS_Store
+
+# Ignore ESLint cache
+.eslintcache
+
+# Ignore directory and file to keep data 
+/data/
+/data/*
+!data/.gitkeep
