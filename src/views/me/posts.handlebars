@@ -1,0 +1,30 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Last update</th>
+      <th scope="col">Update</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each posts}}
+      <tr>
+        <th scope="row">{{increaseByOne @index}}</th>
+        <td>{{this.title}}</td>
+        <td>{{this.updatedAt}}</td>
+        <td>
+          <button>
+            <a href="/me/posts/{{this._id}}/edit">✍️</a>
+          </button>
+        </td>
+        <td>
+          <button>
+            <a>🗑️</a>
+          </button>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

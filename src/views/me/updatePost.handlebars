@@ -1,0 +1,29 @@
+<div class="container">
+  <h2>Update post</h2>
+
+  <form method="post" action="/me/posts/{{post._id}}/update?_method=PUT" class="create-post">
+    <label for="title">title</label>
+    <input name="title" id="title" type="text" value="{{post.title}}" />
+
+    <label for="description">description</label>
+    <input
+      name="description"
+      id="description"
+      type="text"
+      value="{{post.description}}"
+    />
+
+    <label for="thumbnail">thumbnail url</label>
+    <input
+      name="thumbnail"
+      id="thumbnail"
+      type="text"
+      value="{{post.thumbnail}}"
+    />
+
+    <label for="video">video source</label>
+    <input name="video" id="video" type="text" value="{{post.video}}" />
+
+    <button type="submit">Update</button>
+  </form>
+</div>

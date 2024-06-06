@@ -8,6 +8,8 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="stylesheet" href="/style.css" />
     <title>F8 blog</title>
   </head>
@@ -41,18 +43,21 @@
               <a class="nav-link" href="/about">About</a>
             </li>
           </ul>
-          <form class="d-flex" role="search" style="margin-bottom: 0;">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
+          <div class="dropdown">
             <button
-              class="btn btn-outline-success"
-              type="submit"
-            >Search</button>
-          </form>
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Jerry Pham
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item active" href="/posts/create">Create Post</a></li>
+              <li><a class="dropdown-item" href="/me/posts">My posts</a></li>
+              <li><a class="dropdown-item" href="#">Sign out</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
