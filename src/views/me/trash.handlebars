@@ -1,0 +1,137 @@
+<div class="container">
+  <div>
+    <button>⬅️<a href="/me/posts">back</a></button>
+  </div>
+
+    <div id="options-trash">
+      <div>
+        <input type="checkbox" name="selectAll" value="true" id="selectAll" />
+        <label for="selectAll">All</label>
+      </div>
+
+      <button type="button" class="bulk-restore-btn" disabled>
+        ➕
+      </button>
+
+      <button type="button" class="bulk-delete-btn" disabled>
+        🗑️
+      </button>
+    </div>
+
+  <form method="post" class="bulk-restore-delete-form">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Deleted at</th>
+          <th scope="col">Restore</th>
+          <th scope="col">Permanent Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each posts}}
+          <tr>
+            <th><input
+                type="checkbox"
+                name="ids[]"
+                value="{{this._id}}"
+                class="trash-item-select"
+              /></th>
+            <th scope="row">{{increaseByOne @index}}</th>
+            <td>{{this.title}}</td>
+            <td>{{this.deletedAt}}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-primary restore-btn"
+                onclick="restorePost('{{this._id}}')"
+              >
+                ➕
+              </button>
+            </td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-primary delete-btn"
+                onclick="deletePost('{{this._id}}')"
+              >
+                🗑️
+              </button>
+            </td>
+          </tr>
+        {{else}}
+          <tr style="text-align: center;">
+            <td>Trash is empty</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </form>
+
+</div>
+
+<form method="post" class="hidden-form"></form>
+
+
+
+<script>
+  const form = document.querySelector('.hidden-form');
+  const restorePost = (postId) => { 
+    form.action = `/me/posts/trash/${postId}/restore?_method=PATCH`;
+    form.submit();
+  }
+
+  const deletePost = (postId) => {
+    form.action = `/me/posts/trash/${postId}/force?_method=DELETE`;
+    form.submit();
+  }
+
+  // bulk select, delete
+  const selectAll = document.querySelector('#selectAll');
+  const trashItemsSelect = document.querySelectorAll('.trash-item-select');
+  const bulkRestoreBtn = document.querySelector('.bulk-restore-btn')
+  const bulkDeleteBtn = document.querySelector('.bulk-delete-btn')
+
+  let checkedBoxCount = 0;
+  const numberOfBox = trashItemsSelect.length;
+
+  // reset checkboxes firefox
+  selectAll.checked = false;
+  trashItemsSelect.forEach(trashItem => {
+      trashItem.checked = false
+  })
+
+  selectAll.onclick = () => {
+    checkedBoxCount = selectAll.checked ? numberOfBox : 0;
+    bulkDeleteBtn.disabled = !selectAll.checked;
+    bulkRestoreBtn.disabled = !selectAll.checked;
+    trashItemsSelect.forEach(trashItem => {
+        trashItem.checked = selectAll.checked
+    })
+  }
+
+  trashItemsSelect.forEach(trashItem => {
+    trashItem.onclick = () => {
+      if (trashItem.checked) {
+        checkedBoxCount++;
+      } else {
+        checkedBoxCount--;
+      }
+      selectAll.checked = checkedBoxCount == numberOfBox
+      bulkDeleteBtn.disabled = checkedBoxCount == 0
+      bulkRestoreBtn.disabled = checkedBoxCount == 0
+    }
+  })
+
+  const bulkForm = document.querySelector('.bulk-restore-delete-form')
+  bulkRestoreBtn.onclick = () => {
+    bulkForm.action = '/me/posts/trash/bulk-restore?_method=PATCH'
+    bulkForm.submit();
+  }
+  bulkDeleteBtn.onclick = () => {
+    bulkForm.action = '/me/posts/trash/bulk-delete?_method=DELETE'
+    bulkForm.submit();
+  }
+</script>

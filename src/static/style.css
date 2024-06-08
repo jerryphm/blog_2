@@ -198,3 +198,15 @@ body {
     flex-direction: column;
     gap: 20px;
 }
+
+#trash-btn {
+    float: right;
+    margin-right: 30px;
+}
+
+#options-trash {
+    margin: 16px 10px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}

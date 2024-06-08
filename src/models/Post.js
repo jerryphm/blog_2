@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const slugGenerator = require("mongoose-slug-generator");
+const mongooseDelete = require("mongoose-delete");
 
-mongoose.plugin(slugGenerator);
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema(
@@ -14,5 +14,12 @@ const PostSchema = new Schema(
   },
   { timestamps: true }
 );
+
+// plugins
+mongoose.plugin(slugGenerator);
+PostSchema.plugin(mongooseDelete, {
+  deletedAt: true,
+  overrideMethods: true,
+});
 
 module.exports = mongoose.model("Post", PostSchema);
